@@ -1,0 +1,274 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>&lt;Python&gt;&lt;PAT&gt; 1075 PAT Judge | 三个技术小站</title><meta name="description" content="行云流水使用Python排序，输出。然而，超时了。"><meta name="keywords" content="PAT,题解,排序"><meta name="author" content="杨宇昊"><meta name="copyright" content="杨宇昊"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/red_shark.webp"><link rel="canonical" href="https://qsctech-sange.github.io/1075-PAT-Judge.html"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin="crossorigin"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="ykFGsmFH8M0zGBTxnp6wJbCxJCcrr-5_xEd74sfqA6s"/><meta name="msvalidate.01" content="B9612ADF0D9A92F7A76CC3705B2645F6"/><meta name="360-site-verification" content="4417b2a102039ff12038fca1701a3618"/><meta name="yandex-verification" content="{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#00c4b6&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#00c4b6&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#00c4b6&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}"/><meta property="og:type" content="article"><meta property="og:title" content="&lt;Python&gt;&lt;PAT&gt; 1075 PAT Judge"><meta property="og:url" content="https://qsctech-sange.github.io/1075-PAT-Judge.html"><meta property="og:site_name" content="三个技术小站"><meta property="og:description" content="行云流水使用Python排序，输出。然而，超时了。"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp"><meta property="article:published_time" content="2019-08-31T09:35:01.000Z"><meta property="article:modified_time" content="2020-01-25T14:18:42.648Z"><meta name="twitter:card" content="summary"><link rel="manifest" href="/image/pwa/manifest.json"/><meta name="theme-color" content="#fff"/><meta name="msapplication-TileColor" content="#fff"/><link rel="apple-touch-icon" sizes="180x180" href="/image/pwa/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/image/pwa/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/image/pwa/16.png"/><link rel="mask-icon" href="/image/pwa/safari-pinned-tab.svg" color="#5bbad5"/><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = '1'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-1684591464347392',
+  enable_page_level_ads: 'true'
+});</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?bbe3106fee7fc090c2fbe9fa14e2ea91";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=156936411-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '156936411-1');
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.0.2',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离上次更新已经过去了","messageNext":"天，文章内容可能已经过时。"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: {"limitCount":50,"languages":{"author":"作者: 杨宇昊","link":"链接: ","source":"来源: 三个技术小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  ClickShowText: undefined,
+  medium_zoom: true,
+  fancybox: false,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-01-25 22:18:42'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/red_shark.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">241</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">67</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">17</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">1.</span> <span class="toc-text"> 题目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#input-specification"><span class="toc-number">1.0.1.</span> <span class="toc-text"> Input Specification:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#output-specification"><span class="toc-number">1.0.2.</span> <span class="toc-text"> Output Specification:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sample-input"><span class="toc-number">1.0.3.</span> <span class="toc-text"> Sample Input:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sample-output"><span class="toc-number">1.0.4.</span> <span class="toc-text"> Sample Output:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text"> 题解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">2.1.</span> <span class="toc-text"> 思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">2.2.</span> <span class="toc-text"> 数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95"><span class="toc-number">2.3.</span> <span class="toc-text"> 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#python"><span class="toc-number">2.3.1.</span> <span class="toc-text"> Python</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c"><span class="toc-number">2.3.2.</span> <span class="toc-text"> C++</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">2.4.</span> <span class="toc-text"> 代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#python-2"><span class="toc-number">2.4.1.</span> <span class="toc-text"> Python</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c-2"><span class="toc-number">2.4.2.</span> <span class="toc-text"> C++</span></a></li></ol></li></ol></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-top.webp)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">三个技术小站</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">&lt;Python&gt;&lt;PAT&gt; 1075 PAT Judge</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-08-31T09:35:01.000Z" title="发表于 2019-08-31 17:35:01">2019-08-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-01-25T14:18:42.648Z" title="更新于 2020-01-25 22:18:42">2020-01-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/PAT/">PAT</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/1075-PAT-Judge#post-comment" itemprop="discussionUrl"><span class="valine-comment-count comment-count" data-xid="/1075-PAT-Judge" itemprop="commentCount"></span></a></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h1>
+<p>The ranklist of PAT is generated from the status list, which shows the scores of the submissions. This time you are supposed to generate the ranklist for PAT.</p>
+<h3 id="input-specification"><a class="markdownIt-Anchor" href="#input-specification"></a> Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first line contains 3 positive integers, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi><mo stretchy="false">(</mo><mo>≤</mo><mn>1</mn><msup><mn>0</mn><mn>4</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">N(\leq10^4)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mopen">(</span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>, the total number of users, <em>K</em> (≤5), the total number of problems, and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>M</mi><mo stretchy="false">(</mo><mo>≤</mo><mn>1</mn><msup><mn>0</mn><mn>5</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">M(\leq10^5)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mopen">(</span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">5</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>, the total number of submissions. It is then assumed that the user id’s are 5-digit numbers from 00001 to <em>N</em>, and the problem id’s are from 1 to <em>K</em>. The next line contains <em>K</em> positive integers <code>p[i]</code> (<code>i</code>=1, …, <em>K</em>), where <code>p[i]</code> corresponds to the full mark of the i-th problem. Then <em>M</em> lines follow, each gives the information of a submission in the following format:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user_id problem_id partial_score_obtained</span><br></pre></td></tr></table></figure>
+<p>where <code>partial_score_obtained</code> is either −1 if the submission cannot even pass the compiler, or is an integer in the range [0, <code>p[problem_id]</code>]. All the numbers in a line are separated by a space.</p>
+<h3 id="output-specification"><a class="markdownIt-Anchor" href="#output-specification"></a> Output Specification:</h3>
+<p>For each test case, you are supposed to output the ranklist in the following format:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rank user_id total_score s[1] ... s[K]</span><br></pre></td></tr></table></figure>
+<p>where <code>rank</code> is calculated according to the <code>total_score</code>, and all the users with the same <code>total_score</code> obtain the same <code>rank</code>; and <code>s[i]</code> is the partial score obtained for the <code>i</code>-th problem. If a user has never submitted a solution for a problem, then “-” must be printed at the corresponding position. If a user has submitted several solutions to solve one problem, then the highest score will be counted.</p>
+<p>The ranklist must be printed in non-decreasing order of the ranks. For those who have the same rank, users must be sorted in nonincreasing order according to the number of perfectly solved problems. And if there is still a tie, then they must be printed in increasing order of their id’s. For those who has never submitted any solution that can pass the compiler, or has never submitted any solution, they must NOT be shown on the ranklist. It is guaranteed that at least one user can be shown on the ranklist.</p>
+<h3 id="sample-input"><a class="markdownIt-Anchor" href="#sample-input"></a> Sample Input:</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">7 4 20</span><br><span class="line">20 25 25 30</span><br><span class="line">00002 2 12</span><br><span class="line">00007 4 17</span><br><span class="line">00005 1 19</span><br><span class="line">00007 2 25</span><br><span class="line">00005 1 20</span><br><span class="line">00002 2 2</span><br><span class="line">00005 1 15</span><br><span class="line">00001 1 18</span><br><span class="line">00004 3 25</span><br><span class="line">00002 2 25</span><br><span class="line">00005 3 22</span><br><span class="line">00006 4 -1</span><br><span class="line">00001 2 18</span><br><span class="line">00002 1 20</span><br><span class="line">00004 1 15</span><br><span class="line">00002 4 18</span><br><span class="line">00001 3 4</span><br><span class="line">00001 4 2</span><br><span class="line">00005 2 -1</span><br><span class="line">00004 2 0</span><br></pre></td></tr></table></figure>
+<h3 id="sample-output"><a class="markdownIt-Anchor" href="#sample-output"></a> Sample Output:</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1 00002 63 20 25 - 18</span><br><span class="line">2 00005 42 20 0 22 -</span><br><span class="line">2 00007 42 - 25 - 17</span><br><span class="line">2 00001 42 18 18 4 2</span><br><span class="line">5 00004 40 15 0 25 -</span><br></pre></td></tr></table></figure>
+<h1 id="题解"><a class="markdownIt-Anchor" href="#题解"></a> 题解</h1>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<ul>
+<li>这道题很复杂</li>
+<li>但是使用Python就会很优雅</li>
+<li>可是会有一个点超时</li>
+<li>其实这道题每个点都不难，只是拼在一起显得有些庞大</li>
+<li>首先就是一个读入成绩，计算总成绩并排名输出的题</li>
+<li>主要是有一些细节，我们来理一理。</li>
+<li>首先是最复杂的，对于<strong>成绩</strong></li>
+<li>我们把成绩分为三个状态
+<ul>
+<li>完全没做（这里设为-2）</li>
+<li>做了，但是编译错误(-1)</li>
+<li>做了，且有分</li>
+</ul>
+</li>
+<li>在计算总成绩的时候，编译错误（-1）的要按0计。</li>
+<li>在输出的时候，判断要不要输出的标准是
+<ul>
+<li>所有题目都是没做或编译错误（all in (-1 -2)）</li>
+</ul>
+</li>
+<li>输出的时候
+<ul>
+<li>对于编译错误(-1)，输出0</li>
+<li>对于没做的题(-2)，输出“-”</li>
+</ul>
+</li>
+<li>我们可以默认给每个学生都是-2,然后每次读成绩取已有成绩和读到成绩的max即可</li>
+<li>接着就是对于<strong>排序</strong>
+<ul>
+<li>第一原则是总分从大到小</li>
+<li>第二原则是答对满分的题目总量从大到小</li>
+<li>第三原则是id从小到大</li>
+</ul>
+</li>
+<li>最后关于排名的计算</li>
+<li>我们初始化一个rank等于0</li>
+<li>当我们排好序并开始遍历的时候，有一个循环变量，假设是<code>i</code></li>
+<li>如果<code>i==0</code>或者遍历着的这个人的总成绩和上一个人不一样</li>
+<li>那么<code>rank = i + 1</code></li>
+<li>否则<code>rank</code>不变。</li>
+</ul>
+<h2 id="数据结构"><a class="markdownIt-Anchor" href="#数据结构"></a> 数据结构</h2>
+<ul>
+<li>full 是一个列表，表示每道题目的满分
+<ul>
+<li>下标是(题目序号-1)</li>
+<li>值是满分</li>
+<li>即，full[0] = 10 表示第一题的满分是10</li>
+</ul>
+</li>
+<li>rank 记录排名</li>
+<li>total_score 记录每个人的总成绩</li>
+<li>scores 记录每个人的成绩，题号下标为真实题号-1
+<ul>
+<li>即，<code>scores[3][5] = 10</code> 含义是id为3的人的第6题得分是10</li>
+<li>对于Python而言，scores是一个字典。</li>
+<li>对于C++而言，scores 是一个数组。</li>
+<li>两者可以互换，只是为了cover两种做法所以这么写。</li>
+</ul>
+</li>
+<li>对C++而言</li>
+<li>User表示一个人的结构体
+<ul>
+<li>包含了id</li>
+<li>总成绩</li>
+<li>满分题目个数</li>
+<li>重载了小于号以便比较</li>
+</ul>
+</li>
+<li>users 是一个vector，存放了所有的考生，以User的形式存放，它用来被排序</li>
+<li>should_print 记录一个学生该不该被打印。</li>
+<li>虽然C++数据结构复杂了很多，但是计算的思想其实是一样的。</li>
+</ul>
+<h2 id="算法"><a class="markdownIt-Anchor" href="#算法"></a> 算法</h2>
+<h3 id="python"><a class="markdownIt-Anchor" href="#python"></a> Python</h3>
+<ul>
+<li>读入full，初始化scores，令其对每个考生的每个科目成绩都是-2</li>
+<li>计算总成绩，计入total_score</li>
+<li>排序。其中答对满分的个数由<code>-len([i for i in range(num_pro) if full[i] == scores[x][i]])</code>来表示。即新建一个列表，遍历这个人的分数，如果一门成绩等于满分，那么添加进这个列表。最后统计列表的项数。所以总共的排序用一行就可以完成。</li>
+<li>其实total_score 也可以在排序里用列表生成式完成，但是因为最后还要输出和，不如先存下来。</li>
+<li>输出，rank计算方法在思路里，最后每门的成绩用成绩列表连成字符串，同时替换-2和-1。</li>
+</ul>
+<h3 id="c"><a class="markdownIt-Anchor" href="#c"></a> C++</h3>
+<ul>
+<li>读入full，初始化scores，should_print，令其对每个考生的每个科目成绩都是-2，每个考生都是不该被打印。</li>
+<li>读入成绩的时候，如果读到了非-1的成绩，那么更新这个考生的should_print为True</li>
+<li>读入成绩按照max(原成绩，新读到的)这样更新即可。</li>
+<li>统计每个考生的满分题数和总分，建立一个user，并添加到users这个vector里面。</li>
+<li>对vector进行排序。</li>
+<li>输出。</li>
+</ul>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<ul>
+<li>这道题使用Python会有一个点超时。</li>
+</ul>
+<h3 id="python-2"><a class="markdownIt-Anchor" href="#python-2"></a> Python</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="comment"># 数据结构初始化</span></span><br><span class="line">num_users, num_pro, num_sub = list(map(int, input().split()))</span><br><span class="line">full = list(map(int, input().split()))</span><br><span class="line">scores = defaultdict(<span class="keyword">lambda</span>: [<span class="number">-2</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(num_pro)])</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(num_sub):</span><br><span class="line">    id, pro, score = input().split()</span><br><span class="line">    scores[id][int(pro) - <span class="number">1</span>] = max(scores[id][int(pro) - <span class="number">1</span>], int(score))</span><br><span class="line"><span class="comment"># 计算总成绩</span></span><br><span class="line">total_score = defaultdict(int)</span><br><span class="line"><span class="keyword">for</span> id <span class="keyword">in</span> scores.keys():</span><br><span class="line">    total_score[id] = sum([i <span class="keyword">for</span> i <span class="keyword">in</span> scores[id] <span class="keyword">if</span> i != <span class="number">-2</span> <span class="keyword">and</span> i != <span class="number">-1</span>])</span><br><span class="line"><span class="comment"># 排序</span></span><br><span class="line">ids = sorted(scores.keys(),</span><br><span class="line">             key=<span class="keyword">lambda</span> x: (-total_score[x], -len([i <span class="keyword">for</span> i <span class="keyword">in</span> range(num_pro) <span class="keyword">if</span> full[i] == scores[x][i]]), int(x)))</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">rank = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i, id <span class="keyword">in</span> enumerate(ids):</span><br><span class="line">    <span class="keyword">if</span> set(scores[id]).issubset(&#123;<span class="number">-1</span>, <span class="number">-2</span>&#125;):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> rank == <span class="number">0</span> <span class="keyword">or</span> total_score[id] != total_score[ids[i - <span class="number">1</span>]]:</span><br><span class="line">        rank = i + <span class="number">1</span></span><br><span class="line">    print(rank, id, total_score[id], end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    ans = <span class="string">&quot; &quot;</span>.join(list(map(str, scores[id]))).replace(<span class="string">&quot;-2&quot;</span>, <span class="string">&quot;-&quot;</span>).replace(<span class="string">&quot;-1&quot;</span>, <span class="string">&quot;0&quot;</span>)</span><br><span class="line">    print(ans)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="c-2"><a class="markdownIt-Anchor" href="#c-2"></a> C++</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">User</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">int</span> total_score;</span><br><span class="line">    <span class="keyword">int</span> num_full;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> User &amp;b) &#123;</span><br><span class="line">        <span class="keyword">if</span> (total_score != b.total_score)</span><br><span class="line">            <span class="keyword">return</span> b.total_score &lt; total_score;</span><br><span class="line">        <span class="keyword">if</span> (num_full != b.num_full)</span><br><span class="line">            <span class="keyword">return</span> b.num_full &lt; num_full;</span><br><span class="line">        <span class="keyword">return</span> id &lt; b.id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num_users, num_pro, num_sub;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;num_users, &amp;num_pro, &amp;num_sub);</span><br><span class="line">    <span class="comment">// 题目的满分</span></span><br><span class="line">    <span class="keyword">int</span> full[num_pro];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num_pro; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;full[i]);</span><br><span class="line">	<span class="comment">// 该不该打印</span></span><br><span class="line">    <span class="keyword">bool</span> should_print[num_users + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;=num_users;i++)</span><br><span class="line">        should_print[i]= <span class="literal">false</span>;</span><br><span class="line">	<span class="comment">// 每个人每道题的分</span></span><br><span class="line">    <span class="keyword">int</span> scores[num_users + <span class="number">1</span>][num_pro];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= num_users; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; num_pro; j++)</span><br><span class="line">            scores[i][j] = <span class="number">-2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 读取数据，并更新最高分，更新该不该打印</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num_sub; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> id, pro, score;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;id, &amp;pro, &amp;score);</span><br><span class="line">        <span class="keyword">if</span> (score != <span class="number">-1</span>)</span><br><span class="line">            should_print[id] = <span class="literal">true</span>;</span><br><span class="line">        scores[id][pro - <span class="number">1</span>] = <span class="built_in">max</span>(scores[id][pro - <span class="number">1</span>], score);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 统计总分和满分题目数量，并添加到vector中</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;User&gt; users;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= num_users; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> temp_full, temp_total;</span><br><span class="line">        temp_full = <span class="number">0</span>;</span><br><span class="line">        temp_total = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; num_pro; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (scores[i][j] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                temp_total += scores[i][j];</span><br><span class="line">                <span class="keyword">if</span> (full[j] == scores[i][j])</span><br><span class="line">                    temp_full += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        users.emplace_back(User&#123;i, temp_total, temp_full&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 排序</span></span><br><span class="line">    sort(users.<span class="built_in">begin</span>(), users.<span class="built_in">end</span>());</span><br><span class="line">	<span class="comment">// 输出</span></span><br><span class="line">    <span class="keyword">int</span> rank = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num_users; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!should_print[users[i].id])</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span> (rank == <span class="number">0</span> <span class="keyword">or</span> users[i].total_score != users[i - <span class="number">1</span>].total_score)</span><br><span class="line">            rank = i + <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d %05d %d&quot;</span>, rank, users[i].id, users[i].total_score);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; num_pro; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (scores[users[i].id][j] == <span class="number">-2</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot; -&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (scores[users[i].id][j] == <span class="number">-1</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot; 0&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot; %d&quot;</span>, scores[users[i].id][j]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/PAT/">PAT</a><a class="post-meta__tags" href="/tags/%E9%A2%98%E8%A7%A3/">题解</a><a class="post-meta__tags" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/wechat.webp" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/wechat.webp" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/alipay.webp" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/alipay.webp" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/1078-Hashing"><img class="prev-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">&lt;Python&gt;&lt;PAT&gt; 1078 Hashing</div></div></a></div><div class="next-post pull-right"><a href="/1074-Reversing-Linked-List"><img class="next-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">&lt;Python&gt;&lt;PAT&gt; 1074 Reversing Linked List</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/1153-Decode-Registration-Card-of-PAT.html" title="<Python><PAT> 1153 Decode Registration Card of PAT"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-25</div><div class="relatedPosts_title"><Python><PAT> 1153 Decode Registration Card of PAT</div></div></a></div><div class="relatedPosts_item"><a href="/1083-List-Grades.html" title="<Python><PAT> 1083 List Grades"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2019-09-16</div><div class="relatedPosts_title"><Python><PAT> 1083 List Grades</div></div></a></div><div class="relatedPosts_item"><a href="/1080-Graduate-Admission.html" title="<Python><PAT> 1080 Graduate Admission"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-25</div><div class="relatedPosts_title"><Python><PAT> 1080 Graduate Admission</div></div></a></div><div class="relatedPosts_item"><a href="/1029-Median.html" title="<Python><PAT> 1029 Median"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2019-09-16</div><div class="relatedPosts_title"><Python><PAT> 1029 Median</div></div></a></div><div class="relatedPosts_item"><a href="/1028-List-Sorting.html" title="<Python><PAT> 1028 List Sorting"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2019-09-16</div><div class="relatedPosts_title"><Python><PAT> 1028 List Sorting</div></div></a></div><div class="relatedPosts_item"><a href="/1025-PAT-Ranking.html" title="<Python><PAT> 1025 PAT Ranking"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2019-09-16</div><div class="relatedPosts_title"><Python><PAT> 1025 PAT Ranking</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer" style="background-image: url(https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-top.webp)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By 杨宇昊</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">我怎么就这么菜啊！</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script>function loadValine () {
+  function initValine () {
+    window.valine = new Valine({
+      el: '#vcomment',
+      appId: '4z8dfu0wvumOs1BjFBJ5jUQ3-gzGzoHsz# leancloud application app id',
+      appKey: 'ikfFd8mKVK80FpjJve5nhHVF# leancloud application app key',
+      placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+      avatar: 'monsterid',
+      meta: 'nick,mail'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    });
+    if ('nick,mail') { valine.config.requiredFields= 'nick,mail'.split(',') }
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks"></canvas><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/js/third-party/fireworks.js"></script><script defer="defer" id="ribbon_piao" mobile="false" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+document.body.addEventListener('input', POWERMODE);
+</script></div></body></html>

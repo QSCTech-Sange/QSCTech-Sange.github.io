@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>好久没更新了。 | 三个技术小站</title><meta name="description" content="最近过得不太好。分手了。"><meta name="keywords" content="序言"><meta name="author" content="杨宇昊"><meta name="copyright" content="杨宇昊"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/red_shark.webp"><link rel="canonical" href="https://qsctech-sange.github.io/nowadays.html"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin="crossorigin"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="ykFGsmFH8M0zGBTxnp6wJbCxJCcrr-5_xEd74sfqA6s"/><meta name="msvalidate.01" content="B9612ADF0D9A92F7A76CC3705B2645F6"/><meta name="360-site-verification" content="4417b2a102039ff12038fca1701a3618"/><meta name="yandex-verification" content="{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#00c4b6&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#00c4b6&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#00c4b6&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}"/><meta property="og:type" content="article"><meta property="og:title" content="好久没更新了。"><meta property="og:url" content="https://qsctech-sange.github.io/nowadays.html"><meta property="og:site_name" content="三个技术小站"><meta property="og:description" content="最近过得不太好。分手了。"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/cover.webp"><meta property="article:published_time" content="2019-10-06T03:10:01.000Z"><meta property="article:modified_time" content="2020-01-23T13:58:54.013Z"><meta name="twitter:card" content="summary"><link rel="manifest" href="/image/pwa/manifest.json"/><meta name="theme-color" content="#fff"/><meta name="msapplication-TileColor" content="#fff"/><link rel="apple-touch-icon" sizes="180x180" href="/image/pwa/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/image/pwa/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/image/pwa/16.png"/><link rel="mask-icon" href="/image/pwa/safari-pinned-tab.svg" color="#5bbad5"/><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = '1'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-1684591464347392',
+  enable_page_level_ads: 'true'
+});</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?bbe3106fee7fc090c2fbe9fa14e2ea91";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=156936411-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '156936411-1');
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.0.2',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离上次更新已经过去了","messageNext":"天，文章内容可能已经过时。"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: {"limitCount":50,"languages":{"author":"作者: 杨宇昊","link":"链接: ","source":"来源: 三个技术小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  ClickShowText: undefined,
+  medium_zoom: true,
+  fancybox: false,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: false,
+  postUpdate: '2020-01-23 21:58:54'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/red_shark.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">241</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">67</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">17</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/zju-top.webp)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">三个技术小站</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">好久没更新了。</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-10-06T03:10:01.000Z" title="发表于 2019-10-06 11:10:01">2019-10-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-01-23T13:58:54.013Z" title="更新于 2020-01-23 21:58:54">2020-01-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/nowadays#post-comment" itemprop="discussionUrl"><span class="valine-comment-count comment-count" data-xid="/nowadays" itemprop="commentCount"></span></a></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p>相对于我建站的时间和文章数来说，我是真的很久没更新了。如果你看过以前的置顶文章或是点开过最上面的“关于我”（其实两篇是同一篇），你可能记得我在里面写得雄赳赳，气昂昂的样子，好像有个光明而远大的未来。</p>
+<p>可能绝大多数人是搜某道题的题解或是搜什么工具的教程才来到这小破站，对我是谁我怎么样不在乎。这样也好，我可以在里面随心所欲写点东西，也没人会留意。我以前是这样子的自信吧，本身没有多大荣华富贵的野心，我以为怎么也能混出个稍微体面点的未来，我的条件和基础也没那么糟糕吧。</p>
+<p>可是自从我<strong>分手</strong>后，感觉整个世界观在天翻地覆。我想把以前那篇文章删掉，想了想算了，留个纪念吧，纪念一下自己也幸福过，也自信过。这一个月来我过得很糟糕，不停地怀疑自己，也不想写文章。写下这篇文章的时候，我已然大四了，需要考虑未来了。我把所有关于未来和前程的规划的重心都放在她身上，现在却深陷进去难以剥离。我完全不知道未来该怎么办。</p>
+<p>她拒绝得很彻底。洒脱而平静。有时候我希望自己像自己的文字一样冷静，但到头来这一个多月是我哭得疯狂而歇斯底里，卑微地哀求。我始终控制不好自己的情绪，处理不好自己的感情。我一直想做一个温暖的人，想写博客帮助更多的人，更想改变自己，提高自己，想做一个越来越好的男朋友。从不修边幅的肥宅生活变得每天精心打理自己。开始每天剃胡子，开始尝试喷男士香水，开始整理一个干净利落的发型，开始热爱生活，更热爱你。每天的梦里我们都始终还在一起，醒来却空荡荡的，不仅是是人，心里也空荡荡的。那么多美好的回忆啊，你明明说过我们在一起很快乐的啊，说好要一起走的啊。我们还有好多好多事情说好要一起做的呢，你怎么能说话不算数呢。我们甚至还没有去过彼此的家乡，还没有一张像样的合照。感觉自己像个小女生一样，这一个月每天哭哭啼啼无精打采的，做什么事都沉不下心。哭泣的样子又不想被别人看到，只能偷偷找没人的角落开始想你。我还想再抱抱你，再哄哄你，再见见你，再照顾照顾你。为什么不给我这个机会呢？你是怎么做到这么冷静的？</p>
+<p>那天是我最后一次挣扎了吧。将近四个月不见，我幻想过无数次甜蜜的重逢，没想到结局会是这样。偷偷打探到你来这的航班，一大早把自己收拾干净，捧上一束花，乘着摇摇晃晃的机场专线大巴。悄然守在机场，想给你一个惊喜，也是想感动你。形形色色人影匆匆，站在T3的门口，有的看到了我拿了一束花还在对我微笑。然而我其实也知道不太可能成功了，尽管还是倔强地去了。一九年十月四日，我会记得那天。即便戴着口罩，即便换了一身装扮，我还是认出你来了。没有拥抱，甚至你没有笑，没有惊喜。回来的那辆大巴，和我年初第一次来机场接你的那辆是同辆，车牌号都是一样的。甚至你挑的位子也和以前一样。你喜欢坐在靠窗的那一侧。像把我们的过去再重演一遍。最后你把花还给我。可是我给你的爱怎么还给我啊？感情你拿什么还啊？</p>
+<p>我觉得我算是够了解你了吧。你喜欢喜茶的满倍葡萄柚，喜欢一点点的四季奶青，喜欢笑着说我的这杯怎么这么甜。喜欢甜点，喜欢蛋糕，喜欢DQ，喜欢可爱多。喜欢麦当劳。喜欢一切只要和牛奶有关。喜欢看电影，不喜欢矫情的爱情片。也像男孩子一样喜欢火锅烧烤。喜欢一起走路的时候站在我的左手边。喜欢番茄汤底却不喜欢番茄。不喜欢香菜。不喜欢水果蔬菜。不喜欢大太阳。唯一让我不确定的是，你说过你喜欢我，也说过不喜欢我。</p>
+<p>大约是大一下的时候，三年前，我被诊断患上了神经性荨麻疹。不是很严重的病啦，也不传染不遗传，但是很可能会跟一辈子。医生说，当你焦虑紧张的时候，就会发病，全身上下就会非常痒，控制不住得痒。医生说我要随身带着药，一吃药就没事了，等到你真正能够做到再也不紧张焦虑了，就会痊愈。我以为我算是一直积极乐观吧，但是有时候明明自己觉得屁大点事不值得烦恼，还是身体最诚实地反馈给我。最后不得不习惯每隔两三天吃药，然后月底的时候去一趟校医院，再感叹自己的钱包又瘪了。</p>
+<p>后来你的出现，连同带来的甜蜜和温暖，童话般不可思议地让它消失了。剩下没吃完的两盒药放在我的橱柜里放了大半年。也许早就过期了吧。</p>
+<p>这可能是我能想象到的关于感情的最理想的状态了。你对我才不仅仅是一些额外的欢乐，一篇崭新的故事，一碗亲手做的热汤，一次一起用功的自习，一顿随时想约就约的饭局，一场有说有笑的电影，一段一起撑伞慢慢走过的艳阳路，一首可以把耳机左右分开互相分享的甜甜的歌，一通想念时可以毫不犹豫按下拨号键的电话，一个关于未来的可能的答案。</p>
+<p>你是我的解药。不可或缺的解药。</p>
+<p>有时候会想，人们单纯出于喜欢而在一起同时又不会被外界太约束的时候，可能也就大学这几年的光阴吧。到了未来，我会变得现实，变得冷血，变得物质。甜蜜而青涩的最灿烂的时光，就戛然而止了。我的青春也结束了。现在想想，倒也庆幸校门口堕落街的饭店关得很快，一家一家像灭了我的回忆一盏一盏。</p>
+<p>以前我还经常劝自己的朋友走出来，向前看。轮到我自己，却还是像个傻子一样原地打转，想等你回来。你是我的灯塔吧，一直是我前进的方向和动力。我可能是陷入迷雾中了，真的感觉周围的空气好压抑，好窒息。</p>
+<p>以后有机会想开了会继续更新博客吧。</p>
+<p>我好想你啊。真的。<br />
+虽然你不会看到这里。</p>
+</div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%BA%8F%E8%A8%80/">序言</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/cover.webp" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/wechat.webp" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/wechat.webp" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/alipay.webp" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/alipay.webp" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/choosetutor"><img class="prev-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/eco-cover.webp" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">浅谈window.showModalDialog——从一个教务网的落后设计谈起</div></div></a></div><div class="next-post pull-right"><a href="/LeetCode-98"><img class="next-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/LeetCode-cover.webp" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">98. 验证二叉搜索树</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/Python-tutorial.html" title="「震惊」来用玩游戏的方式来快速上手 Python 吧！"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/python_preface"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-23</div><div class="relatedPosts_title">「震惊」来用玩游戏的方式来快速上手 Python 吧！</div></div></a></div><div class="relatedPosts_item"><a href="/Python-1.html" title="「序章」梦回大唐"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/python_preface"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-23</div><div class="relatedPosts_title">「序章」梦回大唐</div></div></a></div><div class="relatedPosts_item"><a href="/Chinese-Copywritting-Guidelines.html" title="中文文案排版指北"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/baba"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-29</div><div class="relatedPosts_title">中文文案排版指北</div></div></a></div><div class="relatedPosts_item"><a href="/leetcode-preface.html" title="LeetCode 题解序言"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/LeetCode-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-02-04</div><div class="relatedPosts_title">LeetCode 题解序言</div></div></a></div><div class="relatedPosts_item"><a href="/PAT-Preface.html" title="可能是全网唯一的 PAT 题解 in Python3"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2019-09-16</div><div class="relatedPosts_title">可能是全网唯一的 PAT 题解 in Python3</div></div></a></div><div class="relatedPosts_item"><a href="/threeone.html" title="——三个？ ——一个。"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2019-10-06</div><div class="relatedPosts_title">——三个？ ——一个。</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer" style="background-image: url(https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/zju-top.webp)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By 杨宇昊</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">我怎么就这么菜啊！</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    window.valine = new Valine({
+      el: '#vcomment',
+      appId: '4z8dfu0wvumOs1BjFBJ5jUQ3-gzGzoHsz# leancloud application app id',
+      appKey: 'ikfFd8mKVK80FpjJve5nhHVF# leancloud application app key',
+      placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+      avatar: 'monsterid',
+      meta: 'nick,mail'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    });
+    if ('nick,mail') { valine.config.requiredFields= 'nick,mail'.split(',') }
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks"></canvas><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/js/third-party/fireworks.js"></script><script defer="defer" id="ribbon_piao" mobile="false" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+document.body.addEventListener('input', POWERMODE);
+</script></div></body></html>

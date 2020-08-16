@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>&lt;Python&gt;&lt;PAT&gt; 1016 Phone Bills | 三个技术小站</title><meta name="description" content="有点繁琐，耗时间"><meta name="keywords" content="PAT,题解"><meta name="author" content="杨宇昊"><meta name="copyright" content="杨宇昊"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/red_shark.webp"><link rel="canonical" href="https://qsctech-sange.github.io/1016-Phone-Bills.html"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin="crossorigin"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="ykFGsmFH8M0zGBTxnp6wJbCxJCcrr-5_xEd74sfqA6s"/><meta name="msvalidate.01" content="B9612ADF0D9A92F7A76CC3705B2645F6"/><meta name="360-site-verification" content="4417b2a102039ff12038fca1701a3618"/><meta name="yandex-verification" content="{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#00c4b6&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#00c4b6&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#00c4b6&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}"/><meta property="og:type" content="article"><meta property="og:title" content="&lt;Python&gt;&lt;PAT&gt; 1016 Phone Bills"><meta property="og:url" content="https://qsctech-sange.github.io/1016-Phone-Bills.html"><meta property="og:site_name" content="三个技术小站"><meta property="og:description" content="有点繁琐，耗时间"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp"><meta property="article:published_time" content="2019-08-21T08:12:09.000Z"><meta property="article:modified_time" content="2020-01-25T14:18:42.638Z"><meta name="twitter:card" content="summary"><link rel="manifest" href="/image/pwa/manifest.json"/><meta name="theme-color" content="#fff"/><meta name="msapplication-TileColor" content="#fff"/><link rel="apple-touch-icon" sizes="180x180" href="/image/pwa/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/image/pwa/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/image/pwa/16.png"/><link rel="mask-icon" href="/image/pwa/safari-pinned-tab.svg" color="#5bbad5"/><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = '1'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-1684591464347392',
+  enable_page_level_ads: 'true'
+});</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?bbe3106fee7fc090c2fbe9fa14e2ea91";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=156936411-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '156936411-1');
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.0.2',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离上次更新已经过去了","messageNext":"天，文章内容可能已经过时。"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: {"limitCount":50,"languages":{"author":"作者: 杨宇昊","link":"链接: ","source":"来源: 三个技术小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  ClickShowText: undefined,
+  medium_zoom: true,
+  fancybox: false,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-01-25 22:18:42'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/red_shark.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">241</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">67</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">17</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">1.</span> <span class="toc-text"> 题目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#input-specification"><span class="toc-number">1.0.1.</span> <span class="toc-text"> Input Specification:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#output-specification"><span class="toc-number">1.0.2.</span> <span class="toc-text"> Output Specification:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sample-input"><span class="toc-number">1.0.3.</span> <span class="toc-text"> Sample Input:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sample-output"><span class="toc-number">1.0.4.</span> <span class="toc-text"> Sample Output:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text"> 题解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">2.1.</span> <span class="toc-text"> 思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">2.2.</span> <span class="toc-text"> 数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95"><span class="toc-number">2.3.</span> <span class="toc-text"> 算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">2.4.</span> <span class="toc-text"> 代码</span></a></li></ol></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-top.webp)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">三个技术小站</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">&lt;Python&gt;&lt;PAT&gt; 1016 Phone Bills</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-08-21T08:12:09.000Z" title="发表于 2019-08-21 16:12:09">2019-08-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-01-25T14:18:42.638Z" title="更新于 2020-01-25 22:18:42">2020-01-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/PAT/">PAT</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/1016-Phone-Bills#post-comment" itemprop="discussionUrl"><span class="valine-comment-count comment-count" data-xid="/1016-Phone-Bills" itemprop="commentCount"></span></a></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h1>
+<p>A long-distance telephone company charges its customers by the following rules:</p>
+<p>Making a long-distance call costs a certain amount per minute, depending on the time of day when the call is made. When a customer starts connecting a long-distance call, the time will be recorded, and so will be the time when the customer hangs up the phone. Every calendar month, a bill is sent to the customer for each minute called (at a rate determined by the time of day). Your job is to prepare the bills for each month, given a set of phone call records.</p>
+<h3 id="input-specification"><a class="markdownIt-Anchor" href="#input-specification"></a> Input Specification:</h3>
+<p>Each input file contains one test case. Each case has two parts: the rate structure, and the phone call records.</p>
+<p>The rate structure consists of a line with 24 non-negative integers denoting the toll (cents/minute) from 00:00 - 01:00, the toll from 01:00 - 02:00, and so on for each hour in the day.</p>
+<p>The next line contains a positive number <em>N</em> (≤1000), followed by <em>N</em> lines of records. Each phone call record consists of the name of the customer (string of up to 20 characters without space), the time and date (<code>mm:dd:hh:mm</code>), and the word <code>on-line</code> or <code>off-line</code>.</p>
+<p>For each test case, all dates will be within a single month. Each <code>on-line</code> record is paired with the chronologically next record for the same customer provided it is an <code>off-line</code> record. Any <code>on-line</code> records that are not paired with an <code>off-line</code> record are ignored, as are <code>off-line</code> records not paired with an <code>on-line</code> record. It is guaranteed that at least one call is well paired in the input. You may assume that no two records for the same customer have the same time. Times are recorded using a 24-hour clock.</p>
+<h3 id="output-specification"><a class="markdownIt-Anchor" href="#output-specification"></a> Output Specification:</h3>
+<p>For each test case, you must print a phone bill for each customer.</p>
+<p>Bills must be printed in alphabetical order of customers’ names. For each customer, first print in a line the name of the customer and the month of the bill in the format shown by the sample. Then for each time period of a call, print in one line the beginning and ending time and date (<code>dd:hh:mm</code>), the lasting time (in minute) and the charge of the call. The calls must be listed in chronological order. Finally, print the total charge for the month in the format shown by the sample.</p>
+<h3 id="sample-input"><a class="markdownIt-Anchor" href="#sample-input"></a> Sample Input:</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">10 10 10 10 10 10 20 20 20 15 15 15 15 15 15 15 20 30 20 15 15 10 10 10</span><br><span class="line">10</span><br><span class="line">CYLL 01:01:06:01 on-line</span><br><span class="line">CYLL 01:28:16:05 off-line</span><br><span class="line">CYJJ 01:01:07:00 off-line</span><br><span class="line">CYLL 01:01:08:03 off-line</span><br><span class="line">CYJJ 01:01:05:59 on-line</span><br><span class="line">aaa 01:01:01:03 on-line</span><br><span class="line">aaa 01:02:00:01 on-line</span><br><span class="line">CYLL 01:28:15:41 on-line</span><br><span class="line">aaa 01:05:02:24 on-line</span><br><span class="line">aaa 01:04:23:59 off-line</span><br></pre></td></tr></table></figure>
+<h3 id="sample-output"><a class="markdownIt-Anchor" href="#sample-output"></a> Sample Output:</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CYJJ 01</span><br><span class="line">01:05:59 01:07:00 61 $12.10</span><br><span class="line">Total amount: $12.10</span><br><span class="line">CYLL 01</span><br><span class="line">01:06:01 01:08:03 122 $24.40</span><br><span class="line">28:15:41 28:16:05 24 $3.85</span><br><span class="line">Total amount: $28.25</span><br><span class="line">aaa 01</span><br><span class="line">02:00:01 04:23:59 4318 $638.80</span><br><span class="line">Total amount: $638.80</span><br></pre></td></tr></table></figure>
+<h1 id="题解"><a class="markdownIt-Anchor" href="#题解"></a> 题解</h1>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<ul>
+<li>题目意思画得很庞大但看例子还是蛮清楚的</li>
+<li>第一行是24个小时每个小时不同的收费</li>
+<li>第二行告诉你有几个记录</li>
+<li>然后是每条记录</li>
+<li><strong>注意</strong>不是每条记录都是有效的，对于同一个人来说，所有的账单里按时间排序，只有一前一后正好是on-line和off-line的这样一对订单才算数</li>
+<li><strong>注意</strong>当一个人的订单全部都是错误的时候，不是输出这个人的月度账单总额为0,而是直接不输出它。</li>
+</ul>
+<h2 id="数据结构"><a class="markdownIt-Anchor" href="#数据结构"></a> 数据结构</h2>
+<ul>
+<li>toll是一个数组
+<ul>
+<li>下标是小时</li>
+<li>值是这一小时的每分钟收费</li>
+</ul>
+</li>
+<li>records是一个字典
+<ul>
+<li>键是用户名</li>
+<li>值是元祖列表，代表这个用户的所有账单
+<ul>
+<li>一开始录入数据，元祖由(时间，状态)组成</li>
+<li>清理过后，元祖由(on-line时间，off-line时间)这样来表示一对有效账单，时间不算上月</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="算法"><a class="markdownIt-Anchor" href="#算法"></a> 算法</h2>
+<ul>
+<li>读入数据
+<ul>
+<li>记得记录月份</li>
+</ul>
+</li>
+<li>清理数据
+<ul>
+<li>对字典的每一项清理</li>
+<li>对一个用户的所有账单按照时间排序</li>
+<li>只有一前一后正好on-line和off-line匹配的才算数</li>
+<li>更新这个用户的账单，用成对的元祖来表示</li>
+</ul>
+</li>
+<li>计算时间差和价格
+<ul>
+<li>采用终点减起点的方式计算</li>
+<li>从这个月初开始，计算到起点的时间，计算到终点的时间，之间的差就是时间差</li>
+<li>价格同理，假设从月初一直打电话，然后计算价格差</li>
+<li>价格就是先计算不算今天，以前的所有天的总价，再计算不算分钟，这天零点到这个小时的总价，再计算分钟的价格，加起来</li>
+</ul>
+</li>
+</ul>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<p>因为使用Python3能AC，因此只写了Python3的代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给定dd:hh::mm的字符串，返回从这个月头到这个时间点的总分钟数和总价格（假设每一分都在打电话）</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">time_to_money</span>(<span class="params">a: str</span>):</span></span><br><span class="line">    day, hour, minute = int(a[:<span class="number">2</span>]), int(a[<span class="number">3</span>:<span class="number">5</span>]), int(a[<span class="number">6</span>:])</span><br><span class="line">    minutes = day * <span class="number">24</span> * <span class="number">60</span> + hour * <span class="number">60</span> + minute</span><br><span class="line">    money = sum(toll) * <span class="number">60</span> * day</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(hour):</span><br><span class="line">        money += toll[i] * <span class="number">60</span></span><br><span class="line">    money += toll[hour] * minute</span><br><span class="line">    <span class="keyword">return</span> minutes, money</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据结构初始化与录入数据</span></span><br><span class="line">toll = list(map(int, input().split()))</span><br><span class="line">records = defaultdict(list)</span><br><span class="line">num_records = int(input())</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(num_records):</span><br><span class="line">    info = input().split()</span><br><span class="line">    records[info[<span class="number">0</span>]].append((info[<span class="number">1</span>], info[<span class="number">2</span>]))</span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>: month = info[<span class="number">1</span>][:<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理数据</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> records.keys():</span><br><span class="line">    records[i].sort(key=<span class="keyword">lambda</span> x: x[<span class="number">0</span>])</span><br><span class="line">    temp_list = []</span><br><span class="line">    <span class="keyword">for</span> j, k <span class="keyword">in</span> enumerate(records[i]):</span><br><span class="line">        <span class="keyword">if</span> j + <span class="number">1</span> &lt; len(records[i]) <span class="keyword">and</span> k[<span class="number">1</span>] == <span class="string">&quot;on-line&quot;</span> <span class="keyword">and</span> records[i][j + <span class="number">1</span>][<span class="number">1</span>] == <span class="string">&quot;off-line&quot;</span>:</span><br><span class="line">            temp_list.append((k[<span class="number">0</span>][<span class="number">3</span>:], records[i][j + <span class="number">1</span>][<span class="number">0</span>][<span class="number">3</span>:]))</span><br><span class="line">    records[i] = temp_list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算并输出</span></span><br><span class="line">name_list = sorted([i <span class="keyword">for</span> i <span class="keyword">in</span> records.keys() <span class="keyword">if</span> records[i]])</span><br><span class="line"><span class="keyword">for</span> user <span class="keyword">in</span> name_list:</span><br><span class="line">    print(user, month)</span><br><span class="line">    sums = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> begin, end <span class="keyword">in</span> records[user]:</span><br><span class="line">        minute_begin, money_begin = time_to_money(begin)</span><br><span class="line">        minute_end, money_end = time_to_money(end)</span><br><span class="line">        print(<span class="string">&quot;%s %s %d %c%.2f&quot;</span> % (begin, end, minute_end - minute_begin, <span class="string">&quot;$&quot;</span>, (money_end - money_begin) / <span class="number">100</span>))</span><br><span class="line">        sums += (money_end - money_begin)</span><br><span class="line">    print(<span class="string">&quot;Total amount: $%.2f&quot;</span> % (sums / <span class="number">100</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/PAT/">PAT</a><a class="post-meta__tags" href="/tags/%E9%A2%98%E8%A7%A3/">题解</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/wechat.webp" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/wechat.webp" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/alipay.webp" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/alipay.webp" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/1017-Queueing-at-Bank"><img class="prev-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">&lt;Python&gt;&lt;PAT&gt; 1017 Queueing at Bank</div></div></a></div><div class="next-post pull-right"><a href="/1015-Reversible-Primes"><img class="next-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">&lt;Python&gt;&lt;PAT&gt; 1015 Reversible Primes</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/1147-Heaps.html" title="<Python><PAT> 1147 Heaps"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2019-09-16</div><div class="relatedPosts_title"><Python><PAT> 1147 Heaps</div></div></a></div><div class="relatedPosts_item"><a href="/1151-LCA-in-a-Binary-Tree.html" title="<Python><PAT> 1151 LCA in a Binary Tree"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2019-09-16</div><div class="relatedPosts_title"><Python><PAT> 1151 LCA in a Binary Tree</div></div></a></div><div class="relatedPosts_item"><a href="/1143-Lowest-Common-Ancestor.html" title="<Python><PAT> 1143 Lowest Common Ancestor"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2019-09-16</div><div class="relatedPosts_title"><Python><PAT> 1143 Lowest Common Ancestor</div></div></a></div><div class="relatedPosts_item"><a href="/1155-Heap-Paths.html" title="<Python><PAT> 1155 Heap Paths"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2019-09-16</div><div class="relatedPosts_title"><Python><PAT> 1155 Heap Paths</div></div></a></div><div class="relatedPosts_item"><a href="/1154-Vertex-Coloring.html" title="<Python><PAT> 1154 Vertex Coloring"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2019-09-16</div><div class="relatedPosts_title"><Python><PAT> 1154 Vertex Coloring</div></div></a></div><div class="relatedPosts_item"><a href="/1153-Decode-Registration-Card-of-PAT.html" title="<Python><PAT> 1153 Decode Registration Card of PAT"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-25</div><div class="relatedPosts_title"><Python><PAT> 1153 Decode Registration Card of PAT</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer" style="background-image: url(https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/PAT-top.webp)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By 杨宇昊</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">我怎么就这么菜啊！</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script>function loadValine () {
+  function initValine () {
+    window.valine = new Valine({
+      el: '#vcomment',
+      appId: '4z8dfu0wvumOs1BjFBJ5jUQ3-gzGzoHsz# leancloud application app id',
+      appKey: 'ikfFd8mKVK80FpjJve5nhHVF# leancloud application app key',
+      placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+      avatar: 'monsterid',
+      meta: 'nick,mail'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    });
+    if ('nick,mail') { valine.config.requiredFields= 'nick,mail'.split(',') }
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks"></canvas><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/js/third-party/fireworks.js"></script><script defer="defer" id="ribbon_piao" mobile="false" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+document.body.addEventListener('input', POWERMODE);
+</script></div></body></html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ZJUWLAN 一键登录脚本 | 三个技术小站</title><meta name="description" content="仅仅一行代码，一劳永逸，以后连ZJUWLAN就超级方便啦～"><meta name="keywords" content="小Tips,新生"><meta name="author" content="杨宇昊"><meta name="copyright" content="杨宇昊"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/red_shark.webp"><link rel="canonical" href="https://qsctech-sange.github.io/ZJUWLAN-login.html"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin="crossorigin"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="ykFGsmFH8M0zGBTxnp6wJbCxJCcrr-5_xEd74sfqA6s"/><meta name="msvalidate.01" content="B9612ADF0D9A92F7A76CC3705B2645F6"/><meta name="360-site-verification" content="4417b2a102039ff12038fca1701a3618"/><meta name="yandex-verification" content="{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#00c4b6&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#00c4b6&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#00c4b6&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}"/><meta property="og:type" content="article"><meta property="og:title" content="ZJUWLAN 一键登录脚本"><meta property="og:url" content="https://qsctech-sange.github.io/ZJUWLAN-login.html"><meta property="og:site_name" content="三个技术小站"><meta property="og:description" content="仅仅一行代码，一劳永逸，以后连ZJUWLAN就超级方便啦～"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/zju-cover.webp"><meta property="article:published_time" content="2019-04-30T13:11:26.000Z"><meta property="article:modified_time" content="2020-01-25T14:18:42.655Z"><meta name="twitter:card" content="summary"><link rel="manifest" href="/image/pwa/manifest.json"/><meta name="theme-color" content="#fff"/><meta name="msapplication-TileColor" content="#fff"/><link rel="apple-touch-icon" sizes="180x180" href="/image/pwa/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/image/pwa/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/image/pwa/16.png"/><link rel="mask-icon" href="/image/pwa/safari-pinned-tab.svg" color="#5bbad5"/><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = '1'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-1684591464347392',
+  enable_page_level_ads: 'true'
+});</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?bbe3106fee7fc090c2fbe9fa14e2ea91";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=156936411-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '156936411-1');
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.0.2',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离上次更新已经过去了","messageNext":"天，文章内容可能已经过时。"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: {"limitCount":50,"languages":{"author":"作者: 杨宇昊","link":"链接: ","source":"来源: 三个技术小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  ClickShowText: undefined,
+  medium_zoom: true,
+  fancybox: false,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-01-25 22:18:42'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/red_shark.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">241</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">67</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">17</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#zjuwlan-%E8%87%AA%E5%8A%A8%E7%99%BB%E5%BD%95-engilsh-version-in-the-following"><span class="toc-number">1.</span> <span class="toc-text"> ZJUWLAN 自动登录 （Engilsh Version in the following）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9"><span class="toc-number">1.1.</span> <span class="toc-text"> 使用帮助</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E4%B8%8D%E6%98%AF%E5%B0%8F%E7%99%BD"><span class="toc-number">1.1.1.</span> <span class="toc-text"> 我不是小白</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E6%98%AF%E5%B0%8F%E7%99%BD"><span class="toc-number">1.1.2.</span> <span class="toc-text"> 我是小白</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#windows-%E7%94%A8%E6%88%B7"><span class="toc-number">1.1.2.1.</span> <span class="toc-text"> Windows 用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mac-os-linux-%E7%94%A8%E6%88%B7"><span class="toc-number">1.1.2.2.</span> <span class="toc-text"> Mac OS &#x2F; Linux 用户</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E4%B8%80%E5%BF%AB%E4%B9%90-%E7%8E%A9%E5%BE%97%E5%BC%80%E5%BF%83"><span class="toc-number">2.</span> <span class="toc-text"> 五一快乐！ 玩得开心！</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#zjuwlan-auto-login"><span class="toc-number">3.</span> <span class="toc-text"> ZJUWLAN auto-login</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#usage"><span class="toc-number">3.1.</span> <span class="toc-text"> Usage</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#i-am-not-new-here"><span class="toc-number">3.1.1.</span> <span class="toc-text"> I am not new here</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#i-am-new-here"><span class="toc-number">3.1.2.</span> <span class="toc-text"> I am new here</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#windows-user"><span class="toc-number">3.1.2.1.</span> <span class="toc-text"> Windows User</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mac-os-linux-user"><span class="toc-number">3.1.3.</span> <span class="toc-text"> Mac OS&#x2F; Linux User</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#happy-may-day"><span class="toc-number">4.</span> <span class="toc-text"> Happy May Day!</span></a></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/zju-top.webp)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">三个技术小站</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">ZJUWLAN 一键登录脚本</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-04-30T13:11:26.000Z" title="发表于 2019-04-30 21:11:26">2019-04-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-01-25T14:18:42.655Z" title="更新于 2020-01-25 22:18:42">2020-01-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%96%B0%E7%94%9F/">新生</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/ZJUWLAN-login#post-comment" itemprop="discussionUrl"><span class="valine-comment-count comment-count" data-xid="/ZJUWLAN-login" itemprop="commentCount"></span></a></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="zjuwlan-自动登录-engilsh-version-in-the-following"><a class="markdownIt-Anchor" href="#zjuwlan-自动登录-engilsh-version-in-the-following"></a> ZJUWLAN 自动登录 （Engilsh Version in the following）</h1>
+<p>仓库的地址是<a target="_blank" rel="noopener" href="https://github.com/QSCTech-Sange/ZJUWLANlogin">这里</a></p>
+<blockquote>
+<p>由于最（一）近（直）校园网有线网网络频繁波动，我开始转向无线网日常使用和开发，所以想要一个自动登陆的脚本，看了很多github上已有的仓库，都比较复杂（当然也是更全面更周到啦），想要一个简单的zjuwlan登录脚本，遂建了这个仓库，希望能够帮到大家:)<br />
+这个 repo 的目的很简单——让我们向</p>
+</blockquote>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/zjuwlan.webp" alt="ZJUWLAN" /></p>
+<p><strong>说再见吧！</strong></p>
+<h2 id="使用帮助"><a class="markdownIt-Anchor" href="#使用帮助"></a> 使用帮助</h2>
+<h3 id="我不是小白"><a class="markdownIt-Anchor" href="#我不是小白"></a> 我不是小白</h3>
+<ol>
+<li>在终端中获取仓库</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/QSCTech-Sange/ZJUWLANlogin.git</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ZJUWLANlogin</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>
+<p>修改 <code>.ps1</code> （针对 Windows 用户）或 <code>.sh</code> （针对 Mac OS/Linux）的文件，相应位置填入你的用户名和密码。</p>
+</li>
+<li>
+<p>对 Windows 用户而言(使用PowerShell)</p>
+</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> .\ZJUWLANlogin.ps1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>第一次使用可能需要开启能够执行 .ps1 文件的权限</p>
+</blockquote>
+<p>对 Mac OS/Linux 用户而言，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sh ZJUWLANlogin.sh</span></span><br></pre></td></tr></table></figure>
+<p>即可。</p>
+<h3 id="我是小白"><a class="markdownIt-Anchor" href="#我是小白"></a> 我是小白</h3>
+<p>那就不要用 git 了——</p>
+<h4 id="windows-用户"><a class="markdownIt-Anchor" href="#windows-用户"></a> Windows 用户</h4>
+<ol>
+<li>使用记事本新建一个文件，里面输入（可复制）</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Invoke-WebRequest</span> <span class="literal">-Uri</span> <span class="string">&quot;https://net.zju.edu.cn/include/auth_action.php&quot;</span> <span class="literal">-Method</span> <span class="string">&quot;POST&quot;</span> <span class="literal">-Body</span> <span class="string">&quot;action=login&amp;username=YOURID&amp;password=YOURPASSWORD&amp;ac_id=3&amp;user_ip=&amp;nas_ip=&amp;user_mac=&amp;save_me=0&amp;ajax=1&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>请注意上面的 YOURID 和 YOURPASSWORD 这两处请替换为你的学号和zjuwlan的连接密码。</strong></p>
+<ol start="2">
+<li>然后用一个你喜欢的名字保存它，注意扩展名要设置为 <code>.ps1</code> ——这是PowerShell 能够运行的脚本的文件拓展名。保存在任意位置皆可。（我建议放在桌面）</li>
+</ol>
+<blockquote>
+<p>以上两步也可以简化为</p>
+<ol>
+<li>在这个仓库中下载 ZJUWLANlogin.ps1</li>
+<li>使用记事本编辑它，修改 YOURID 和 YOURPASSWORD 这两处请替换为你的学号和zjuwlan的连接密码。</li>
+</ol>
+</blockquote>
+<ol start="3">
+<li>右击选择使用 PowerShell 运行即可直接登录。我建议建立一个Windows 任务计划，使得每次连接 ZJUWLAN 都能自动登录。</li>
+</ol>
+<h4 id="mac-os-linux-用户"><a class="markdownIt-Anchor" href="#mac-os-linux-用户"></a> Mac OS / Linux 用户</h4>
+<ol>
+<li>使用记事本新建一个文件，里面输入（可复制）</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl  -d  &quot;action=login&amp;username=YOURID&amp;password=YOURPASSWORD&amp;ac_id=3&amp;user_ip=&amp;nas_ip=&amp;user_mac=&amp;save_me=0&amp;ajax=1&quot;  https://net.zju.edu.cn/include/auth_action.php</span><br></pre></td></tr></table></figure>
+<p><strong>请注意上面的 YOURID 和 YOURPASSWORD 这两处请替换为你的学号和zjuwlan的连接密码。</strong></p>
+<ol start="2">
+<li>然后用一个你喜欢的名字保存它，注意扩展名要设置为 <code>.sh</code> ——这是 Shell 能够运行的脚本的文件拓展名。保存在任意位置皆可。（我建议放在桌面）</li>
+</ol>
+<blockquote>
+<p>以上两步也可以简化为</p>
+<ol>
+<li>在这个仓库中下载 <a target="_blank" rel="noopener" href="http://ZJUWLANlogin.sh">ZJUWLANlogin.sh</a></li>
+<li>使用记事本编辑它，修改 YOURID 和 YOURPASSWORD 这两处请替换为你的学号和zjuwlan的连接密码。</li>
+</ol>
+</blockquote>
+<ol start="2">
+<li>每次双击它即可直接登录。我建议建立一个Mac OS / Linux 任务计划，使得每次连接 ZJUWLAN 都能自动登录。</li>
+</ol>
+<p>我买不起Mac，所以我也不知道对Mac用户而言可不可行。</p>
+<h1 id="五一快乐-玩得开心"><a class="markdownIt-Anchor" href="#五一快乐-玩得开心"></a> 五一快乐！ 玩得开心！</h1>
+<h1 id="zjuwlan-auto-login"><a class="markdownIt-Anchor" href="#zjuwlan-auto-login"></a> ZJUWLAN auto-login</h1>
+<blockquote>
+<p>Due to the frequent crash of  ZJU’s wired network recently(always),  I started to turn to the wireless network for daily use and development. So I am in need of an auto login script. I have seen many existing repos on GitHub, many of which are too complicated (and of course more comprehensive and thoughtful). So here is a super simple zjuwlan login script, hoping to help you:)</p>
+</blockquote>
+<p>The purpose of this repo is simple - <strong>Let’s say GOODBYE to</strong></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/zjuwlan.webp" alt="ZJUWLAN" /></p>
+<h2 id="usage"><a class="markdownIt-Anchor" href="#usage"></a> Usage</h2>
+<h3 id="i-am-not-new-here"><a class="markdownIt-Anchor" href="#i-am-not-new-here"></a> I am not new here</h3>
+<ol>
+<li>fetch the repo</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/QSCTech-Sange/ZJUWLANlogin.git</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ZJUWLANlogin</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>edit  <code>.ps1</code> （For Windows Users）or  <code>.sh</code> （For Mac OS/ Linux Users）File and fill in the username and password to the appropriate place.</li>
+<li>For Windows Users (Using PowerShell)</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> .\ZJUWLANlogin.ps1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>It may require permission to execute .ps1 files in the first place.</p>
+</blockquote>
+<p>​       For  Mac OS/Linux Users，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sh ZJUWLANlogin.sh</span></span><br></pre></td></tr></table></figure>
+<p>That’s all.</p>
+<h3 id="i-am-new-here"><a class="markdownIt-Anchor" href="#i-am-new-here"></a> I am new here</h3>
+<p>So don’t use Git——</p>
+<h4 id="windows-user"><a class="markdownIt-Anchor" href="#windows-user"></a> Windows User</h4>
+<ol>
+<li>Use Notepad to create a new file and input (you may copy)</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Invoke-WebRequest</span> <span class="literal">-Uri</span> <span class="string">&quot;https://net.zju.edu.cn/include/auth_action.php&quot;</span> <span class="literal">-Method</span> <span class="string">&quot;POST&quot;</span> <span class="literal">-Body</span> <span class="string">&quot;action=login&amp;username=YOURID&amp;password=YOURPASSWORD&amp;ac_id=3&amp;user_ip=&amp;nas_ip=&amp;user_mac=&amp;save_me=0&amp;ajax=1&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>Please note that the  YOURID and YOURPASSWORD above should be replaced with your student ID and zjuwlan connection password.</strong></p>
+<ol start="2">
+<li>Then save it with a name you like, and note that the extension should be set to <code>.ps1</code> – this is the file extension of the script that PowerShell can run. Save it anywhere you can find.(I recommend Desktop)</li>
+</ol>
+<blockquote>
+<p>The above two steps can also be simplified to</p>
+<ol>
+<li>Download ZJUWLANlogin.ps1 in this repository</li>
+<li>Edit it with Notepad and change the YOURID and YOURPASSWORD fields to your student number and zjuwlan connection password.</li>
+</ol>
+</blockquote>
+<ol start="3">
+<li>Right click and run it by PowerShell to login. I recommend creating a Windows task plan that will automatically log in every time you connect to ZJUWLAN.</li>
+</ol>
+<h3 id="mac-os-linux-user"><a class="markdownIt-Anchor" href="#mac-os-linux-user"></a> Mac OS/ Linux User</h3>
+<ol>
+<li>Use Notepad to create a new file and input (you may copy)</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">curl</span>  <span class="literal">-d</span>  <span class="string">&quot;action=login&amp;username=YOURID&amp;password=YOURPASSWORD&amp;ac_id=3&amp;user_ip=&amp;nas_ip=&amp;user_mac=&amp;save_me=0&amp;ajax=1&quot;</span>  https://net.zju.edu.cn/include/auth_action.php</span><br></pre></td></tr></table></figure>
+<p><strong>Please note that the  YOURID and YOURPASSWORD above should be replaced with your student ID and zjuwlan connection password.</strong></p>
+<ol start="2">
+<li>Then save it with a name you like, and note that the extension should be set to <code>.sh</code> – this is the file extension of the script that Shell can run. Save it anywhere you can find.(I recommend Desktop)</li>
+</ol>
+<blockquote>
+<p>The above two steps can also be simplified to</p>
+<ol>
+<li>Download <a target="_blank" rel="noopener" href="http://ZJUWLANlogin.sh">ZJUWLANlogin.sh</a> in this repository</li>
+<li>Edit it with Notepad and change the YOURID and YOURPASSWORD fields to your student number and zjuwlan connection password.</li>
+</ol>
+</blockquote>
+<ol start="3">
+<li>Double click on it to login directly. I recommend creating a Mac OS/Linux task plan that will automatically log in every time you connect to ZJUWLAN.</li>
+</ol>
+<p>I can’t afford a Mac, so I’m not sure whether it can work on Mac OS or not.</p>
+<h1 id="happy-may-day"><a class="markdownIt-Anchor" href="#happy-may-day"></a> Happy May Day!</h1>
+</div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%B0%8FTips/">小Tips</a><a class="post-meta__tags" href="/tags/%E6%96%B0%E7%94%9F/">新生</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/zju-cover.webp" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/wechat.webp" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/wechat.webp" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/alipay.webp" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/alipay.webp" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/social-science-major"><img class="prev-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/zju-cover.webp" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">关于社科选专业的常见问题</div></div></a></div><div class="next-post pull-right"><a href="/threeone"><img class="next-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/cover.webp" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">——三个？ ——一个。</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/Python-study-methods.html" title="Python 学习路径建议"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/python_preface"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-23</div><div class="relatedPosts_title">Python 学习路径建议</div></div></a></div><div class="relatedPosts_item"><a href="/win10-1903-network.html" title="解决Windows10 1903更新的KB4515384补丁造成的无法联网的问题"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/eco-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2019-10-17</div><div class="relatedPosts_title">解决Windows10 1903更新的KB4515384补丁造成的无法联网的问题</div></div></a></div><div class="relatedPosts_item"><a href="/choosetutor.html" title="浅谈window.showModalDialog——从一个教务网的落后设计谈起"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/eco-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-25</div><div class="relatedPosts_title">浅谈window.showModalDialog——从一个教务网的落后设计谈起</div></div></a></div><div class="relatedPosts_item"><a href="/arch-linux-clean.html" title="给你的Arch Linux 清理空间腾出地方！"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/arch"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-25</div><div class="relatedPosts_title">给你的Arch Linux 清理空间腾出地方！</div></div></a></div><div class="relatedPosts_item"><a href="/Font-Suggestion.html" title="你期待已久爱不释手的编程字体！"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/microsoft"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-25</div><div class="relatedPosts_title">你期待已久爱不释手的编程字体！</div></div></a></div><div class="relatedPosts_item"><a href="/jupyter-notebook-tips.html" title="现在就飞起来！Jupyter Notebook 那些如有神助的快捷操作"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/Jupyter_hub"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2019-09-20</div><div class="relatedPosts_title">现在就飞起来！Jupyter Notebook 那些如有神助的快捷操作</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer" style="background-image: url(https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/zju-top.webp)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By 杨宇昊</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">我怎么就这么菜啊！</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script>function loadValine () {
+  function initValine () {
+    window.valine = new Valine({
+      el: '#vcomment',
+      appId: '4z8dfu0wvumOs1BjFBJ5jUQ3-gzGzoHsz# leancloud application app id',
+      appKey: 'ikfFd8mKVK80FpjJve5nhHVF# leancloud application app key',
+      placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+      avatar: 'monsterid',
+      meta: 'nick,mail'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    });
+    if ('nick,mail') { valine.config.requiredFields= 'nick,mail'.split(',') }
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks"></canvas><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/js/third-party/fireworks.js"></script><script defer="defer" id="ribbon_piao" mobile="false" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+document.body.addEventListener('input', POWERMODE);
+</script></div></body></html>

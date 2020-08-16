@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>关于社科选专业的常见问题 | 三个技术小站</title><meta name="description" content="社会科学实验班的专业繁多，跨了很多学院。所以有很多新生来咨询，这里把常见问题整理一下。"><meta name="keywords" content="新生"><meta name="author" content="杨宇昊"><meta name="copyright" content="杨宇昊"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/red_shark.webp"><link rel="canonical" href="https://qsctech-sange.github.io/social-science-major.html"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin="crossorigin"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="ykFGsmFH8M0zGBTxnp6wJbCxJCcrr-5_xEd74sfqA6s"/><meta name="msvalidate.01" content="B9612ADF0D9A92F7A76CC3705B2645F6"/><meta name="360-site-verification" content="4417b2a102039ff12038fca1701a3618"/><meta name="yandex-verification" content="{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#00c4b6&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#00c4b6&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#00c4b6&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}"/><meta property="og:type" content="article"><meta property="og:title" content="关于社科选专业的常见问题"><meta property="og:url" content="https://qsctech-sange.github.io/social-science-major.html"><meta property="og:site_name" content="三个技术小站"><meta property="og:description" content="社会科学实验班的专业繁多，跨了很多学院。所以有很多新生来咨询，这里把常见问题整理一下。"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/zju-cover.webp"><meta property="article:published_time" content="2019-06-13T09:38:56.000Z"><meta property="article:modified_time" content="2020-01-25T14:18:42.641Z"><meta name="twitter:card" content="summary"><link rel="manifest" href="/image/pwa/manifest.json"/><meta name="theme-color" content="#fff"/><meta name="msapplication-TileColor" content="#fff"/><link rel="apple-touch-icon" sizes="180x180" href="/image/pwa/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/image/pwa/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/image/pwa/16.png"/><link rel="mask-icon" href="/image/pwa/safari-pinned-tab.svg" color="#5bbad5"/><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = '1'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-1684591464347392',
+  enable_page_level_ads: 'true'
+});</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?bbe3106fee7fc090c2fbe9fa14e2ea91";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=156936411-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '156936411-1');
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.0.2',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离上次更新已经过去了","messageNext":"天，文章内容可能已经过时。"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: {"limitCount":50,"languages":{"author":"作者: 杨宇昊","link":"链接: ","source":"来源: 三个技术小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  ClickShowText: undefined,
+  medium_zoom: true,
+  fancybox: false,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-01-25 22:18:42'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/red_shark.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">241</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">67</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">17</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E4%B8%93%E4%B8%9A"><span class="toc-number">1.</span> <span class="toc-text"> 如何选专业？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%B9%E5%85%BB%E6%96%B9%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">2.</span> <span class="toc-text"> 培养方案是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%85%E4%BF%AE-%E5%8F%8C%E4%B8%93%E4%B8%9A-%E5%8F%8C%E5%AD%A6%E4%BD%8D"><span class="toc-number">3.</span> <span class="toc-text"> 辅修、双专业、双学位？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E4%B8%93%E4%B8%9A%E7%9A%84%E6%97%B6%E9%97%B4"><span class="toc-number">4.</span> <span class="toc-text"> 选专业的时间？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E6%83%B3%E8%B7%A8%E5%A4%A7%E7%B1%BB%E6%8D%A2%E4%B8%93%E4%B8%9A"><span class="toc-number">5.</span> <span class="toc-text"> 我想（跨大类）换专业？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%93%E4%B8%9A%E9%9D%A2%E8%AF%95%E6%80%8E%E4%B9%88%E7%AD%9B%E9%80%89"><span class="toc-number">6.</span> <span class="toc-text"> 专业面试怎么筛选？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%93%E4%B8%9A%E4%B8%8E%E6%A0%A1%E5%8C%BA"><span class="toc-number">7.</span> <span class="toc-text"> 专业与校区？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E9%80%89%E8%AF%BE"><span class="toc-number">8.</span> <span class="toc-text"> 怎么选课？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E5%90%8E"><span class="toc-number"></span> <span class="toc-text"> 最后</span></a></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/zju-top.webp)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">三个技术小站</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">关于社科选专业的常见问题</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-06-13T09:38:56.000Z" title="发表于 2019-06-13 17:38:56">2019-06-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-01-25T14:18:42.641Z" title="更新于 2020-01-25 22:18:42">2020-01-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%96%B0%E7%94%9F/">新生</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/social-science-major#post-comment" itemprop="discussionUrl"><span class="valine-comment-count comment-count" data-xid="/social-science-major" itemprop="commentCount"></span></a></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p>社会科学实验班的专业繁多，跨了很多学院。所以有很多新生来咨询，这里把常见问题整理一下。</p>
+<h2 id="如何选专业"><a class="markdownIt-Anchor" href="#如何选专业"></a> 如何选专业？</h2>
+<ol>
+<li>首先参考培养方案</li>
+<li>想好自己的<strong>兴趣</strong></li>
+<li>结合未来发展、职业规划、就业前景、教学质量等多种因素考量</li>
+</ol>
+<p>以上排名有优先级。千万不要哪个火就扎堆报哪个。一个专业的火爆往往是因为这个专业的就业前景<strong>目前</strong>被看好，或者说<strong>目前</strong>人才稀缺。但是一个专业的火热往往是有时限的，现在很火的专业，到你研究生毕业六年后，很可能就不会像以前那样风光了。</p>
+<h2 id="培养方案是什么"><a class="markdownIt-Anchor" href="#培养方案是什么"></a> 培养方案是什么？</h2>
+<p>培养方案按照专业划分，每一个专业的培养方案通俗讲就是，作为这个专业的学生，要修读哪些课程才能毕业。</p>
+<p>你和其他专业的学生的不同，基本上是由培养方案所决定的。</p>
+<p>培养方案在<strong>群文件</strong>里，包括了社科的培养方案和全部专业的培养方案。每一届的培养方案可能会有调整，目前已经上传了19级的培养方案。它是你选择专业<strong>最重要</strong>的依据。所以，请<strong>务必仔细阅读</strong>培养方案！</p>
+<h2 id="辅修-双专业-双学位"><a class="markdownIt-Anchor" href="#辅修-双专业-双学位"></a> 辅修、双专业、双学位？</h2>
+<p>辅修、双专业、双学位均可以按修。即按照培养方案选完所有要求的课，就可以拿到相应的证书，不需要申请辅修或者双学位。</p>
+<p>辅修也有专门的申请时间，大致在大一下，申请通过的辅修和辅修按修的区别在于，辅修的同学在选对应课程的时候，享有选课的优先级。</p>
+<p>不是所有专业会开辅修、双专业、双学位。开不开请参阅培养方案。在培养方案中，打不打星号与打星号的数量说明了这门课是辅修要上，双学位要上还是双专业要上。具体都在培养方案。</p>
+<h2 id="选专业的时间"><a class="markdownIt-Anchor" href="#选专业的时间"></a> 选专业的时间？</h2>
+<p>第一轮在十月中旬，社科的同学只能选社科的专业。</p>
+<p>在开学到十月中旬期间有专业宣讲会，可以去听听。</p>
+<p>第二轮在十二月上旬，可以选择所有专业。同时一轮没进到理想专业的同学二轮要面临全校的竞争。</p>
+<p>会保证每个人都有专业。</p>
+<h2 id="我想跨大类换专业"><a class="markdownIt-Anchor" href="#我想跨大类换专业"></a> 我想（跨大类）换专业？</h2>
+<p>可以参与第二轮转专业，即十二月份。</p>
+<h2 id="专业面试怎么筛选"><a class="markdownIt-Anchor" href="#专业面试怎么筛选"></a> 专业面试怎么筛选？</h2>
+<p>网上报名选专业的时候，按照志愿优先的原则筛选。也就是说，把我这个专业放在第一志愿的已经大于招收的名额了，那我这个专业就不考虑把我放在第二志愿的人了。</p>
+<p>如果第一志愿人数小于接受人数，那么第一志愿的所有人就直接进，以此类推。</p>
+<p>如果超出了，就要进行筛选，每个学院有自己的规划。一般是这样，首先面试人数最大为接受容量的150%，超过的一志人数直接淘汰，筛选原则按照高考成绩。</p>
+<p>然后面试成绩和高考成绩按照一定的权重加权，再将成绩排序，接受排在前面的人。</p>
+<p>浙江省和非浙江省分开，接受浙江考生的比例和考入社科的浙江生源比例相同。非浙江省一起比，浙江省一起比。（这是照顾到高考成绩的公平性）</p>
+<p>高考成绩这样算</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">最</mi><mi mathvariant="normal">终</mi><mi mathvariant="normal">成</mi><mi mathvariant="normal">绩</mi><mo>=</mo><mfrac><mrow><mi mathvariant="normal">你</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">高</mi><mi mathvariant="normal">考</mi><mi mathvariant="normal">成</mi><mi mathvariant="normal">绩</mi></mrow><mrow><mi mathvariant="normal">你</mi><mi mathvariant="normal">所</mi><mi mathvariant="normal">在</mi><mi mathvariant="normal">省</mi><mi mathvariant="normal">份</mi><mi mathvariant="normal">考</mi><mi mathvariant="normal">入</mi><mi mathvariant="normal">浙</mi><mi mathvariant="normal">大</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">最</mi><mi mathvariant="normal">高</mi><mi mathvariant="normal">分</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">最终成绩 = \frac{你的高考成绩}{你所在省份考入浙大的最高分}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">最</span><span class="mord cjk_fallback">终</span><span class="mord cjk_fallback">成</span><span class="mord cjk_fallback">绩</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.363em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.677em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord cjk_fallback">你</span><span class="mord cjk_fallback">所</span><span class="mord cjk_fallback">在</span><span class="mord cjk_fallback">省</span><span class="mord cjk_fallback">份</span><span class="mord cjk_fallback">考</span><span class="mord cjk_fallback">入</span><span class="mord cjk_fallback">浙</span><span class="mord cjk_fallback">大</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">最</span><span class="mord cjk_fallback">高</span><span class="mord cjk_fallback">分</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord cjk_fallback">你</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">高</span><span class="mord cjk_fallback">考</span><span class="mord cjk_fallback">成</span><span class="mord cjk_fallback">绩</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>如果分文理，按照文理的来分开算最高分。浙江非浙江都是按照这个来算。</p>
+<p>以上细节可能会按照不同年份，不同学院有所变化，但是大体上是这个流程不会变。</p>
+<p>日后我会在经院咨询群放上经院面试指南。</p>
+<h2 id="专业与校区"><a class="markdownIt-Anchor" href="#专业与校区"></a> 专业与校区？</h2>
+<p>目前，社科的专业除了法学与教育学，全部都在紫金港校区。</p>
+<p>法学大三会去之江校区，教育学大三会去西溪校区（好像这届，也就是2019届，不用去西溪校区）。</p>
+<p>校区也是选专业与选课的一个参考。</p>
+<h2 id="怎么选课"><a class="markdownIt-Anchor" href="#怎么选课"></a> 怎么选课？</h2>
+<p>在军训期间还是军训结束会有你们的第一轮选课。</p>
+<p>由于专业不确定，所以这时候选课确实是会对新生造成一定的困扰。</p>
+<p>如果你心里有理想的专业，那就按照理想的专业的培养方案的建议，来进行修读。</p>
+<p>如果没有的话，先保证体育课，外语类课，通识课，思政课。这些课是所有专业共通的。有一个问题是数学课。社科不同专业对数学的要求差别是很大的。大一上面向社科的有微积分甲、微积分乙、高等数学。高难度的可以替代低难度的，即微积分甲&gt;微积分乙&gt;高等数学。所以如果真的没有想好方向的话建议修微积分甲。建议尽量还是有个心目中理想的培养方案并按照它的数学要求来修。</p>
+<p>体育课所有专业都是上四个学期的体育课。考虑到以后专业有可能换校区的话，尽量在大一大二修完。</p>
+<p>通识课和专业课相对，是简单的，面向全校所有专业的公共课。（几乎）每个专业都要修12学分的通识课。挑感兴趣的上。当然还有些J类通核的必修通识课等等，是后话了。</p>
+<p>思政课包括形策，毛概，思修，史纲，马原，军理等，所有专业都要修，无需前置知识。</p>
+<p>外语类一般是要求6个学分，也就是一般是两个外语课。比如大英3大英4。</p>
+<p>日后我会写个选课指南，包括如何使用求是潮的选课助手等。</p>
+<h1 id="最后"><a class="markdownIt-Anchor" href="#最后"></a> 最后</h1>
+<p>再次强调务必仔细阅读<strong>培养方案</strong>！</p>
+<p>再次强调务必仔细阅读<strong>培养方案</strong>！</p>
+<p>再次强调务必仔细阅读<strong>培养方案</strong>！</p>
+</div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%96%B0%E7%94%9F/">新生</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/zju-cover.webp" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/wechat.webp" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/wechat.webp" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/alipay.webp" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/alipay.webp" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/economy-college-interview"><img class="prev-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/eco-cover.webp" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">超详细经院面试指南（仅供参考）</div></div></a></div><div class="next-post pull-right"><a href="/ZJUWLAN-login"><img class="next-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/zju-cover.webp" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">ZJUWLAN 一键登录脚本</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/SAS-in-2019.html" title="惊了！原来在2019年使用SAS这么简单优雅！"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/sas-logo.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-03</div><div class="relatedPosts_title">惊了！原来在2019年使用SAS这么简单优雅！</div></div></a></div><div class="relatedPosts_item"><a href="/Python-study-methods.html" title="Python 学习路径建议"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/python_preface"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-23</div><div class="relatedPosts_title">Python 学习路径建议</div></div></a></div><div class="relatedPosts_item"><a href="/economy-computer.html" title="关于经院计算机类课程的选择（仅供参考）"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/eco-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2019-09-16</div><div class="relatedPosts_title">关于经院计算机类课程的选择（仅供参考）</div></div></a></div><div class="relatedPosts_item"><a href="/economy-college-interview.html" title="超详细经院面试指南（仅供参考）"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/eco-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-25</div><div class="relatedPosts_title">超详细经院面试指南（仅供参考）</div></div></a></div><div class="relatedPosts_item"><a href="/ZJUWLAN-login.html" title="ZJUWLAN 一键登录脚本"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/zju-cover.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-25</div><div class="relatedPosts_title">ZJUWLAN 一键登录脚本</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer" style="background-image: url(https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/zju-top.webp)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By 杨宇昊</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">我怎么就这么菜啊！</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script>function loadValine () {
+  function initValine () {
+    window.valine = new Valine({
+      el: '#vcomment',
+      appId: '4z8dfu0wvumOs1BjFBJ5jUQ3-gzGzoHsz# leancloud application app id',
+      appKey: 'ikfFd8mKVK80FpjJve5nhHVF# leancloud application app key',
+      placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+      avatar: 'monsterid',
+      meta: 'nick,mail'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    });
+    if ('nick,mail') { valine.config.requiredFields= 'nick,mail'.split(',') }
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks"></canvas><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/js/third-party/fireworks.js"></script><script defer="defer" id="ribbon_piao" mobile="false" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+document.body.addEventListener('input', POWERMODE);
+</script></div></body></html>

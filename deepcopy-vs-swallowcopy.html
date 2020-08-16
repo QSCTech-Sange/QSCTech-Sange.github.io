@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>两分钟让你搞懂深浅拷贝——从一个小秘密说起...... | 三个技术小站</title><meta name="description" content="深浅拷贝是Python初学者的一个很大的槛，而且也是考试的重点。因为课上老师不会过多的讲解且本身有一定的难度，因此写了这个简短的教程，来帮助大家理解这个概念。"><meta name="keywords" content="Python,深拷贝,浅拷贝"><meta name="author" content="杨宇昊"><meta name="copyright" content="杨宇昊"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/red_shark.webp"><link rel="canonical" href="https://qsctech-sange.github.io/deepcopy-vs-swallowcopy.html"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin="crossorigin"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="ykFGsmFH8M0zGBTxnp6wJbCxJCcrr-5_xEd74sfqA6s"/><meta name="msvalidate.01" content="B9612ADF0D9A92F7A76CC3705B2645F6"/><meta name="360-site-verification" content="4417b2a102039ff12038fca1701a3618"/><meta name="yandex-verification" content="{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#00c4b6&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#00c4b6&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#00c4b6&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}"/><meta property="og:type" content="article"><meta property="og:title" content="两分钟让你搞懂深浅拷贝——从一个小秘密说起......"><meta property="og:url" content="https://qsctech-sange.github.io/deepcopy-vs-swallowcopy.html"><meta property="og:site_name" content="三个技术小站"><meta property="og:description" content="深浅拷贝是Python初学者的一个很大的槛，而且也是考试的重点。因为课上老师不会过多的讲解且本身有一定的难度，因此写了这个简短的教程，来帮助大家理解这个概念。"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/python_preface"><meta property="article:published_time" content="2019-12-05T06:44:58.000Z"><meta property="article:modified_time" content="2020-01-22T10:05:45.928Z"><meta name="twitter:card" content="summary"><link rel="manifest" href="/image/pwa/manifest.json"/><meta name="theme-color" content="#fff"/><meta name="msapplication-TileColor" content="#fff"/><link rel="apple-touch-icon" sizes="180x180" href="/image/pwa/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/image/pwa/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/image/pwa/16.png"/><link rel="mask-icon" href="/image/pwa/safari-pinned-tab.svg" color="#5bbad5"/><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = '1'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-1684591464347392',
+  enable_page_level_ads: 'true'
+});</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?bbe3106fee7fc090c2fbe9fa14e2ea91";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=156936411-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '156936411-1');
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.0.2',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离上次更新已经过去了","messageNext":"天，文章内容可能已经过时。"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: {"limitCount":50,"languages":{"author":"作者: 杨宇昊","link":"链接: ","source":"来源: 三个技术小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  ClickShowText: undefined,
+  medium_zoom: true,
+  fancybox: false,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-01-22 18:05:45'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/red_shark.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">241</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">67</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">17</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8E%E4%B8%80%E4%B8%AA%E5%B0%8F%E7%A7%98%E5%AF%86%E8%AF%B4%E8%B5%B7"><span class="toc-number">1.</span> <span class="toc-text"> 从一个小秘密说起</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B3%9F%E7%B3%95%E7%A7%98%E5%AF%86%E8%A2%AB%E5%8F%91%E7%8E%B0%E4%BA%86"><span class="toc-number">2.</span> <span class="toc-text"> 糟糕，秘密被发现了</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E6%B5%85%E7%9A%84%E6%8B%B7%E8%B4%9D%E5%BC%95%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text"> 最浅的拷贝——引用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A8%8D%E5%BE%AE%E6%B7%B1%E4%B8%80%E7%82%B9%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="toc-number">4.</span> <span class="toc-text"> 稍微深一点——浅拷贝</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E6%B7%B1%E7%9A%84%E6%8B%B7%E8%B4%9D%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="toc-number">5.</span> <span class="toc-text"> 最深的拷贝——深拷贝</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text"> 总结</span></a></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/snake)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">三个技术小站</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">两分钟让你搞懂深浅拷贝——从一个小秘密说起......</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-12-05T06:44:58.000Z" title="发表于 2019-12-05 14:44:58">2019-12-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-01-22T10:05:45.928Z" title="更新于 2020-01-22 18:05:45">2020-01-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Python/">Python</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/deepcopy-vs-swallowcopy#post-comment" itemprop="discussionUrl"><span class="valine-comment-count comment-count" data-xid="/deepcopy-vs-swallowcopy" itemprop="commentCount"></span></a></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="从一个小秘密说起"><a class="markdownIt-Anchor" href="#从一个小秘密说起"></a> 从一个小秘密说起</h1>
+<p>你是一个寂寞的人。</p>
+<p>但是，你有一笔宝贵的财富，它一直是你的小秘密。</p>
+<p>你拥有一个绝密的联系册，里面记录了好多小姐姐的联系方式。它是一个列表，以这样的形式存在。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">girls_contacts = [<span class="string">&quot;Jasmine&quot;</span>,<span class="string">&quot;Vanilla&quot;</span>,<span class="string">&quot;Moonlight&quot;</span>]</span><br></pre></td></tr></table></figure>
+<p>它一直是你心底的秘密，直到…</p>
+<h1 id="糟糕秘密被发现了"><a class="markdownIt-Anchor" href="#糟糕秘密被发现了"></a> 糟糕，秘密被发现了</h1>
+<p>你身边的渣男突击你的宿舍，发现了你的小秘密。</p>
+<p>“哈哈！这么多女孩子啊，搞快点，把它们的联系方式给我！“</p>
+<p>你是一个正义的人。你知道，当你把这份名单给他的时候，那些小姐姐一定会被这个渣男伤害。为了保护她们，你想尽可能不让他拷贝你的数据（名单）。</p>
+<h1 id="最浅的拷贝引用"><a class="markdownIt-Anchor" href="#最浅的拷贝引用"></a> 最浅的拷贝——引用</h1>
+<p>但是一开始，你使用了一种最最浅的拷贝，浅到以至于不能被称作是拷贝。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">contacts_for_zha_nan = girls_contacts</span><br></pre></td></tr></table></figure>
+<p>这种复制是什么意思呢？相当于，每次渣男来找你的时候，他都是去询问你，“喂，给我康康那些小姐姐的联系方式！”。也就是说，实际上不存在两份通讯录，他的小姐姐的联系方式直接链接到你的联系方式上的。如果你学过C语言的话，你可以把这个渣男的联系方式当作一个指针。换句话说，在程序里，变量<code>contacts_for_zha_nan</code> 是一个快捷方式，直接链接到你的小姐姐的联系册。</p>
+<p>这样子的后果是什么呢？最显而易见的好处是省空间，尤其是你的联系册特别大的情况下。坏处是什么呢？因为你们俩共享的其实是一份联系册，所以如果你的联系册修改了，渣男也一并会看到，你就无法保护好你的小姐姐了。</p>
+<p>举例来说，如果在现在的情况下，你修改你的联系册，增加一个小姐姐。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">girls_contacts.append(<span class="string">&quot;Sugar&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>而这时候，如果你查看渣男的联系册和你的联系册——</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>girls_contacts</span><br><span class="line">[<span class="string">&quot;Jasmine&quot;</span>,<span class="string">&quot;Vanilla&quot;</span>,<span class="string">&quot;Moonlight&quot;</span>,<span class="string">&quot;Sugar&quot;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>contacts_for_zha_nan</span><br><span class="line">[<span class="string">&quot;Jasmine&quot;</span>,<span class="string">&quot;Vanilla&quot;</span>,<span class="string">&quot;Moonlight&quot;</span>,<span class="string">&quot;Sugar&quot;</span>]</span><br></pre></td></tr></table></figure>
+<p>没错，它们是同样的。</p>
+<h1 id="稍微深一点浅拷贝"><a class="markdownIt-Anchor" href="#稍微深一点浅拷贝"></a> 稍微深一点——浅拷贝</h1>
+<p>这样怎么保护好新的小姐姐！不可以！我们需要另外的拷贝方式！</p>
+<p>正好，Python的列表有一个函数，叫<code>.copy()</code>，它执行的是真正的拷贝，换言之，新列表和旧列表是两份列表。对于我们的例子来说，就是渣男把你的联系册手抄了一份。可以这么写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">contacts_for_zha_nan = girls_contacts.copy()</span><br></pre></td></tr></table></figure>
+<p>哎嘿，这样子的后果是什么呢？最显而易见的好处是隔离开来了，你和他是两份联系册，互相修改互不影响。我们可以这样测试。给你的联系册上加一个人，看看他的联系册上还有没有？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">girls_contacts.append(<span class="string">&quot;Sugar&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>再看看两个人的联系册</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>girls_contacts</span><br><span class="line">[<span class="string">&quot;Jasmine&quot;</span>,<span class="string">&quot;Vanilla&quot;</span>,<span class="string">&quot;Moonlight&quot;</span>,<span class="string">&quot;Sugar&quot;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>contacts_for_zha_nan</span><br><span class="line">[<span class="string">&quot;Jasmine&quot;</span>,<span class="string">&quot;Vanilla&quot;</span>,<span class="string">&quot;Moonlight&quot;</span>]</span><br></pre></td></tr></table></figure>
+<p>好！不会互相影响啦！</p>
+<p>深入一点说，在不用copy的情况下，你和渣男的女生联系册都指向的是同一片内存区域，而现在，你和渣男的女生联系册指向的是两片内存区域。</p>
+<blockquote>
+<p>补充一下 <code>Copy-on-Write</code> 的知识，这个术语叫<code>写时复制</code>，广泛用于操作系统当中，来提高执行效率。你可以理解为它是一个智能的工具，来判断你和渣难的联系册要不要分开。具体来说，在我们复制或者进程复制(fork)的时候，它们都被指向了同一片区域（即共享联系册）。如果这个新进程仅仅只是“读”，不需要“写”。那么这样的共享是没问题的，而且还节省了很大的空间和时间开销(overhead)。因为很显然，都是读内容的话，复制不复制是没有什么区别的。又不需要写，复制不复制有什么本质的关系吗？没有。但是，当这个进程开始尝试对数据进行“写”操作的时候，这时候就要复制原来进程的内存空间，并在新的内存空间上写，以达到两个进程的数据隔离。更微妙的是，它们复制的还不一定是原进程的所有进程，操作系统会采用一种分页机制来优化（这点不深入了）。</p>
+</blockquote>
+<h1 id="最深的拷贝深拷贝"><a class="markdownIt-Anchor" href="#最深的拷贝深拷贝"></a> 最深的拷贝——深拷贝</h1>
+<p>你以为这样就完了？太小瞧渣男了！真正的难题现在才开始。</p>
+<p>我们知道，列表有一种类似“套娃”的机制，即列表嵌列表，二层列表乃至三层列表等。用我们的例子来说，可以当作是，你的联系册上的小姐姐，她又认识其他小姐姐，就间接扩大了联系方式。比如，我们的联系册可以是</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">girls_contacts = [<span class="string">&quot;Jasmine&quot;</span>,<span class="string">&quot;Vanilla&quot;</span>,[<span class="string">&quot;Moonlight&quot;</span>,<span class="string">&quot;Sugar&quot;</span>]]</span><br></pre></td></tr></table></figure>
+<p>即列表的第2项也是一个拥有两项的列表。即联系册的第二个人又认识两个小姐姐。如果我们的渣男想要联系册，动用我们之前学的<code>.copy()</code>函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">contacts_for_zha_nan = girls_contacts.copy()</span><br></pre></td></tr></table></figure>
+<p>这时候，如果你对你的联系册新加一个人，那么渣男的联系册是看不到的，即我们上一章讲的例子。可是，如果我们修改的是那个被套娃的联系人呢？比如说，我们认识的联系人小姐姐又认识了新的小姐姐。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">girls_contacts[<span class="number">2</span>].append(<span class="string">&quot;Ocean&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>这时候我们查看我们的联系册和渣男的联系册。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>girls_contacts</span><br><span class="line">[<span class="string">&quot;Jasmine&quot;</span>,<span class="string">&quot;Vanilla&quot;</span>,[<span class="string">&quot;Moonlight&quot;</span>,<span class="string">&quot;Sugar&quot;</span>,<span class="string">&quot;Ocean&quot;</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>contacts_for_zha_nan</span><br><span class="line">[<span class="string">&quot;Jasmine&quot;</span>,<span class="string">&quot;Vanilla&quot;</span>,[<span class="string">&quot;Moonlight&quot;</span>,<span class="string">&quot;Sugar&quot;</span>,<span class="string">&quot;Ocean&quot;</span>]]</span><br></pre></td></tr></table></figure>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/marmot" alt="啊？" /></p>
+<p>不是说好了复制了吗？不是说好了两个联系册独立了吗，为什么会这样？</p>
+<p>因为在Python里，当你选择<code>.copy()</code>的时候，它是会逐一复制列表的每一项，而列表的第二项其实是一个指针或者说快捷方式，链接到的内存区域是一个列表。用我们的例子来说，也就是说，copy过后，我们有两个联系册，而联系册的第二项都是“去找那个小姐姐问问她的闺蜜”，即指向了这个小姐姐的闺蜜们。所以如果那个小姐姐的闺蜜多了一个人，你和渣男询问这个小姐姐得到的结果都是一样的。换言之，只有第一层是独立的，剩下的内层都是共享的。</p>
+<p>如何规避这种情况呢？如果我们想要任意层套娃都能做到完美的复制，完美地隔离，该怎么办呢？</p>
+<p>方法是有的，那就是<code>深拷贝</code>。Python里有个函数叫deepcopy(需要导入)，又叫深拷贝，干的就是这种活。它会把所有内容都复制一遍，不管多少层。说精确点就是把整个内存空间复制一份，所有的链接或者快捷方式都走到底，而且无关数据类型，什么都可以复制。例如，我们可以这么搞。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line">girls_contacts = [<span class="string">&quot;Jasmine&quot;</span>,<span class="string">&quot;Vanilla&quot;</span>,[<span class="string">&quot;Moonlight&quot;</span>,<span class="string">&quot;Sugar&quot;</span>]]</span><br><span class="line">contacts_for_zha_nan = deepcopy(girls_contacts)</span><br><span class="line">girls_contacts[<span class="number">2</span>].append(<span class="string">&quot;Ocean&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>这时候我们再对比两个人的通讯录。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>girls_contacts</span><br><span class="line">[<span class="string">&quot;Jasmine&quot;</span>,<span class="string">&quot;Vanilla&quot;</span>,[<span class="string">&quot;Moonlight&quot;</span>,<span class="string">&quot;Sugar&quot;</span>,<span class="string">&quot;Ocean&quot;</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>contacts_for_zha_nan</span><br><span class="line">[<span class="string">&quot;Jasmine&quot;</span>,<span class="string">&quot;Vanilla&quot;</span>,[<span class="string">&quot;Moonlight&quot;</span>,<span class="string">&quot;Sugar&quot;</span>]]</span><br></pre></td></tr></table></figure>
+<p>好！这下你和渣男的通讯录完完全全隔离了！你们就像两个平行宇宙，互相不干扰。</p>
+<blockquote>
+<p>这里再提一下内存池的缓冲机制。你可能会好奇，为什么在浅拷贝的时候，列表会作为指针的形式复制，而数字就不会呢？这就涉及到了内存池的缓冲机制概念。说人话就是，如果是小东西（数字，短的字符串），那么复制的时候就是独立形式存在的，如果是大东西（列表，字典，自定义类的对象），就会复制一个指针。至于多小算大，多大算小（多大的小姐姐联系方式才会被共享）不妨自己查一下？</p>
+</blockquote>
+<h1 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h1>
+<p>好了，朋友们，让我们总结一下，三种复制方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">b = a                    <span class="comment"># 是一个引用，a和b是同样的东西</span></span><br><span class="line">b = a.copy()             <span class="comment"># 浅拷贝，a的第一层和b的第一层是独立的，深层都是共享的</span></span><br><span class="line">b = deepcopy(a)          <span class="comment"># 深拷贝，b的每一项深挖到底都是和a在地址上是不同的，独立的</span></span><br></pre></td></tr></table></figure>
+<p>题外话，现实中写代码还是要避免太套娃的层次，会使代码可读性很差，同时使得要拷贝的话得非常谨慎。但是套娃也是很正常的形式，不需要畏惧和抵触。就像生活中，你舔的女神可能也是别的男生的舔狗，而你不知道。（这都是什么比喻）</p>
+<p>本文中的例子全部为虚构，仅仅为了便于理解。</p>
+<p>回到现实生活中，让我看看我的通讯录。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">real_world_girls_contacts = []</span><br></pre></td></tr></table></figure>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/life_suck" alt="生活真美好啊！（苦笑）" /></p>
+</div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/%E6%B7%B1%E6%8B%B7%E8%B4%9D/">深拷贝</a><a class="post-meta__tags" href="/tags/%E6%B5%85%E6%8B%B7%E8%B4%9D/">浅拷贝</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/python_preface" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/wechat.webp" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/wechat.webp" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/alipay.webp" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/alipay.webp" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Chinese-Copywritting-Guidelines"><img class="prev-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/baba" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">中文文案排版指北</div></div></a></div><div class="next-post pull-right"><a href="/option-price"><img class="next-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/Fintech.webp" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Documentaion for option-price</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/Python-tutorial.html" title="「震惊」来用玩游戏的方式来快速上手 Python 吧！"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/python_preface"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-23</div><div class="relatedPosts_title">「震惊」来用玩游戏的方式来快速上手 Python 吧！</div></div></a></div><div class="relatedPosts_item"><a href="/Python-catalog.html" title="Python 教程知识点梳理目录"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/python_preface"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-23</div><div class="relatedPosts_title">Python 教程知识点梳理目录</div></div></a></div><div class="relatedPosts_item"><a href="/Python-1.html" title="「序章」梦回大唐"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/python_preface"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-23</div><div class="relatedPosts_title">「序章」梦回大唐</div></div></a></div><div class="relatedPosts_item"><a href="/option-price.html" title="Documentaion for option-price"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/Fintech.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-08-16</div><div class="relatedPosts_title">Documentaion for option-price</div></div></a></div><div class="relatedPosts_item"><a href="/upload-to-pypi.html" title="想要用pip install XXX 来安装你自己写的代码吗？"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/pypi"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-03-24</div><div class="relatedPosts_title">想要用pip install XXX 来安装你自己写的代码吗？</div></div></a></div><div class="relatedPosts_item"><a href="/GUI-Options-Calculator.html" title="美轮美奂！超漂亮的期权价格计算器！"><img class="relatedPosts_cover" data-lazy-src="https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/Fintech.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fas fa-history fa-fw"></i> 2020-01-25</div><div class="relatedPosts_title">美轮美奂！超漂亮的期权价格计算器！</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer" style="background-image: url(https://cdn.jsdelivr.net/gh/QSCTech-Sange/picBed/snake)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By 杨宇昊</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">我怎么就这么菜啊！</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    window.valine = new Valine({
+      el: '#vcomment',
+      appId: '4z8dfu0wvumOs1BjFBJ5jUQ3-gzGzoHsz# leancloud application app id',
+      appKey: 'ikfFd8mKVK80FpjJve5nhHVF# leancloud application app key',
+      placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+      avatar: 'monsterid',
+      meta: 'nick,mail'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    });
+    if ('nick,mail') { valine.config.requiredFields= 'nick,mail'.split(',') }
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks"></canvas><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/js/third-party/fireworks.js"></script><script defer="defer" id="ribbon_piao" mobile="false" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+document.body.addEventListener('input', POWERMODE);
+</script></div></body></html>
