@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://qsctech-sange.github.io/LeetCode-812.html</loc>
+    <lastmod>2020-08-16</lastmod>
+  </url>
+  <url>
     <loc>https://qsctech-sange.github.io/option-price.html</loc>
     <lastmod>2020-08-16</lastmod>
   </url>
@@ -23,10 +27,6 @@
   <url>
     <loc>https://qsctech-sange.github.io/leetcode-preface.html</loc>
     <lastmod>2020-02-04</lastmod>
-  </url>
-  <url>
-    <loc>https://qsctech-sange.github.io/LeetCode-812.html</loc>
-    <lastmod>2020-02-03</lastmod>
   </url>
   <url>
     <loc>https://qsctech-sange.github.io/LeetCode-419.html</loc>
