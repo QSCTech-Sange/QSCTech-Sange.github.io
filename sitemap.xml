@@ -1761,14 +1761,14 @@
   </url>
   
   <url>
-    <loc>https://qsctech-sange.github.io/tags/DFS/</loc>
+    <loc>https://qsctech-sange.github.io/tags/BFS/</loc>
     <lastmod>2020-10-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://qsctech-sange.github.io/tags/BFS/</loc>
+    <loc>https://qsctech-sange.github.io/tags/DFS/</loc>
     <lastmod>2020-10-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
